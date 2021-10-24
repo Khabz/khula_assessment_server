@@ -1,13 +1,13 @@
-import express, { Request, Response } from 'express';
-import cors from 'cors';
+import app from './app';
+import Logger from './utils/console';
 
-const PORT = process.env.PORT || 4001;
-const app = express();
+const NAMESPACE = 'SERVER'
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const PORT = process.env.PORT || 3000;
+const ENV = process.env.NODE_ENV || 'development';
 
-app.listen(PORT, () => {
-	console.log(`Server listening on port ${PORT}`);
-});
+const server = app.listen(PORT, () => {
+	Logger.info(`${NAMESPACE}`, `Server is running on port ${PORT} in ${ENV} mode`);
+})
+
+export default server;
