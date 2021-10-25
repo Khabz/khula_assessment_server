@@ -1,23 +1,25 @@
 import { Sequelize } from 'sequelize';
-import config from './default';
 import Logger from '../utils/console';
 
-const NAMESPACE = 'DATABASE';
+import dbConfig from './config';
 
-const { DB_NAME, HOST_NAME, DB_PORT, USERNAME, PASSWORD } = config;
+const { DB_NAME, HOST_NAME, PORT, USER_NAME, PASSWORD } = dbConfig;
 
-const db = new Sequelize(String(DB_NAME), String(USERNAME), String(PASSWORD), {
-	host: HOST_NAME,
-	port: Number(DB_PORT),
+// const isProd = process.env.NODE_ENV === 'production';
+const namespace = 'DB';
+
+const db = new Sequelize(String(DB_NAME), String(USER_NAME), String(PASSWORD), {
+	host: String(HOST_NAME),
+	port: Number(PORT),
 	dialect: 'mariadb',
 });
 
 export const SQ = db;
 
-db.authenticate().then(() => {
-    Logger.info(NAMESPACE, 'Database connection has been established successfully.');
-}).catch((error) => {
-    Logger.error(NAMESPACE, 'Unable to connect to the database:', error);
-})
+db.authenticate()
+	.then(() => Logger.info(namespace, ': Database connection established'))
+	.catch((error) =>
+		Logger.error(namespace, ': Database connection failed', error)
+	);
 
 export default db;

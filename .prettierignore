@@ -1,0 +1,10 @@
+docs/
+package.json
+yarn.lock
+definitions
+
+dist/*
+coverage/*
+
+# 3rd party libs
+/src/public/

@@ -1,3 +1,8 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable no-console */
+
 const getTimeStamp = () => {
 	return new Date().toISOString();
 };

@@ -1,22 +1,38 @@
-import express, { application, Request, Response } from 'express';
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable import/first */
+import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import path from 'path';
+import * as dotenv from 'dotenv';
+import middlewareLogger from './middleware/logger.middleware';
+
+dotenv.config({ path: `${path.join(__dirname, '..')}/.env` });
 import routes from './routes/routes';
 
 const app = express();
 
-// Middlewares
+// const corsOptions = require('./config/corsOptions');
+
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
-//Routes
+// Security
+app.use(helmet());
+
+// Logger
+app.use(middlewareLogger);
+
+// Initialize routes
+
 routes(app);
-app.use((req: Request, res: Response, next: any) => {
-    return res.status(404).json({
-        status: 404,
-        error: 'Resource not found'
-    })
-})
+
+app.use((req, res) => {
+	return res.status(404).send({
+		status: 404,
+		error: 'Resource not found',
+	});
+});
 
 export default app;

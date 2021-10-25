@@ -1,17 +1,18 @@
 import { Router, Express } from 'express';
 
 // Controllers
-import * as homeController from '../controllers/home.controller';
-// routes
+import * as Welcome from '../controllers/welcome.controller';
+// Routes
 import schoolRoutes from './school.routes';
 
-const router: Router = Router();
+const router = Router();
 
-const routes = (app: Express) => {
-    app.use('/', router.get('/', homeController.index));
-    app.use('/', router.get('/status', homeController.status));
-    //School routes
-    app.use('/api/schools', schoolRoutes);
-}
+const Routes = (app: Express) => {
+	// Server status
+	app.use('/', router.get('/', Welcome.index));
 
-export default routes;
+	// Add more routes
+	app.use('/api/school', schoolRoutes);
+};
+
+export default Routes;

@@ -1,8 +1,8 @@
 import express from 'express';
-import schoolsController from '../controllers/schools.controller';
+import schoolController from '../controllers/school.controller';
 
 const router = express.Router();
 
-router.get('/', schoolsController.getSchools);
+router.get('/', schoolController.getSchools);
 
 export default router;
