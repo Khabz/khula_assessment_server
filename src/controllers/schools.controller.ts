@@ -38,9 +38,11 @@ const getSchools = async (req: Request, res: Response) => {
 			});
 		});
 
+		// Sort schoolArr to alphabetically
+		const sortArr = schoolArr.sort((a, b) => (a.name > b.name) ? 1 : -1);
 		return res.status(200).json({
 			success: true,
-			data: schoolArr,
+			data: sortArr,
 		});
 	} catch (error) {
 		Logger.error(NAMESPACE, `${error}`);
