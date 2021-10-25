@@ -19,7 +19,7 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-push": "npm run lint-staged && npm run lint && npm run test && git add ."
+			"pre-push": "npm run lint-staged && npm run lint && git add ."
 		}
 	},
 	"lint-staged": {

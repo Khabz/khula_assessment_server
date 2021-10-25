@@ -12,7 +12,7 @@ const Routes = (app: Express) => {
 	app.use('/', router.get('/', Welcome.index));
 
 	// Add more routes
-	app.use('/api/school', schoolRoutes);
+	app.use('/api/schools', schoolRoutes);
 };
 
 export default Routes;
